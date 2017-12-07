@@ -1,0 +1,17 @@
+<table class="table table-hover">
+				<tr>
+					<td>#</td>
+					<td>Id</td>
+					<td>IP</td>
+          <td>Bridge Key</td>
+				</tr>
+			{% for active_user in active_users %}
+				<tr>
+          <td></td>
+					<td>{{ active_user.special_id }}</td>
+					<td>{{ active_user.ip }}</td>
+          <td>{{ active_user.bridge_pk }}</td>
+				</tr>
+
+			{% endfor %}
+			</table>

@@ -1,0 +1,10 @@
+{% extends "bar/main_template.html" %}
+
+{% block content %}
+	</br></br>
+	<div class="container">
+		<div class="alert alert-success" role="alert">{{ auth_message }} . Press here to <a href="{% url 'login' %}" >Log In</a></div>
+      </div> <!-- /container -->
+
+
+{% endblock %}

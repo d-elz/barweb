@@ -1,0 +1,46 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/bar">Bar <i class="fa fa-tty" aria-hidden="true"></i>
+</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li {% if name_menu == "main" %} class="active"{% endif %}><a href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li{% if name_menu == "About" %} class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
+            <li{% if name_menu == "Contact" %} class="active"{% endif %}><a href="{% url 'contact' %}">Contact</a></li>
+            <li{% if name_menu == "ActiveUsers" %} class="active"{% endif %}><a href="{% url 'active_users' %}">Active Users</a></li>
+            <li{% if name_menu == "PublicUsers" %} class="active"{% endif %}><a href="{% url 'public_users' %}">Public Users</a></li>
+            <li{% if name_menu == "ExchangeKeys" %} class="active"{% endif %}><a href="{% url 'exchange_keys' %}">Exchange Keys</a></li>
+
+          </ul>
+
+			{% if request.user.is_authenticated %}
+				<ul class="nav navbar-nav navbar-right">
+				  <li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ request.user }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+            <li role="separator" class="divider"></li>
+						<li><a href="{% url 'logout' %}">Log Out</a></li>
+					  </ul>
+				  </li>
+				</ul>
+			{% else %}
+				  <ul class="nav navbar-nav navbar-right">
+					<li{% if name_menu == "Log In" %} class="active"{% endif %}><a href="{% url 'login' %}" ><i class="fa fa-user-secret" aria-hidden="true"></i>
+		 Log In</a></li>
+					<li{% if name_menu == "Register" %} class="active"{% endif %}><a href="{% url 'register' %}"><i class="fa fa-registered" aria-hidden="true"></i>
+		 Register</a></li>
+				   </ul>
+			{% endif %}
+        </div><!--/.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+	<br><br>

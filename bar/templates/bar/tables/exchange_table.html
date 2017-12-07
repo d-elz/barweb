@@ -1,0 +1,15 @@
+<table class="table table-hover">
+				<tr>
+					<td>#</td>
+					<td>Nym</td>
+					<td>Cij</td>
+				</tr>
+			{% for exchange_key in exchange_keys %}
+				<tr>
+          <td></td>
+					<td>{{ exchange_key.nym }}</td>
+					<td>{{ exchange_key.cij }}</td>
+				</tr>
+
+			{% endfor %}
+			</table>

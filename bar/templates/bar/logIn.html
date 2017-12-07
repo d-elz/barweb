@@ -1,0 +1,27 @@
+{% extends "bar/main_template.html" %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<form class="form-signin" method="post" action="{% url 'auth_view' %}">{% csrf_token %}
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<label for="pseudonym" class="sr-only">Pseudonym</label>
+			<input type="text" id="pseudonym" name="pseudonym" class="form-control" placeholder="Pseudonym" required autofocus>
+			<label for="PublicKey" class="sr-only">Public Key</label>
+			<input type="pk" id="pk" name="pk" class="form-control" placeholder="Public Key" required>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		  </form>
+		{% if auth_message != ""%}
+			<div class="alert alert-danger" role="alert"> {{ auth_message }} </div>
+		{% endif %}
+		</div>
+		<div class="col-md-4">
+		</div>
+      </div> <!-- /container -->
+
+
+{% endblock %}

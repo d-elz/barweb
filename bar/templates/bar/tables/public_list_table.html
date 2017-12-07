@@ -1,0 +1,17 @@
+<table class="table table-hover">
+				<tr>
+					<td>#</td>
+					<td>Nym</td>
+					<td>PK</td>
+          <td>Signature</td>
+				</tr>
+			{% for public_user in public_users %}
+				<tr>
+          <td></td>
+					<td>{{ public_user.nym }}</td>
+					<td>{{ public_user.pk }}</td>
+          <td>{{ public_user.signature }}</td>
+				</tr>
+
+			{% endfor %}
+			</table>

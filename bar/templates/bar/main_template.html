@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+
+<title>{{ main_title }} |{{ name_menu }}</title>
+
+<!--
+
+<link rel ='stylesheet' href = "{% static 'css/bootstrap.min' %}" 	type = 'text/css' />
+<link rel ='stylesheet' href = "{% static 'css/bootstrap-theme.min' %}" type = 'text/css' />
+<link rel ='stylesheet' href = "{% static 'css/font-awesome.min' %}"	type = 'text/css' />
+<link rel ='stylesheet' href = "{% static 'css/jquery-ui' %}" 			type = 'text/css' />
+
+<link rel ='stylesheet' href = "{% static 'js/bootstrap.min' %}" 	type = 'text/css' />
+<link rel ='stylesheet' href = "{% static 'js/jquery-2.1.4.min' %}" type = 'text/css' />
+<link rel ='stylesheet' href = "{% static 'js/jquery-ui' %}" 		type = 'text/css' />
+-->
+
+{% include "bar/config/css.html" %}
+{% include "bar/config/js.html" %}
+
+</head>
+
+
+<body>
+
+	<!--Top Bar-->
+	{% include "bar/template/top-bar.html" %}
+
+    <div class="container">
+	{% block content %}
+
+	{% endblock %}
+
+	</div>
+
+
+
+
+
+		<!--Footer-->
+		{% include "bar/template/footer.html" %}
+
+
+
+
+
+</body></html>

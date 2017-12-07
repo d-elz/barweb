@@ -1,0 +1,26 @@
+{% extends "bar/main_template.html" %}
+
+
+
+{% block content %}
+
+<div class="container">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4">
+		<form class="form-signin" method="post" action="{% url 'contact' %}">{% csrf_token %}
+		<h2 class="form-signin-heading">Please contact us</h2>
+		<label for="username" class="sr-only">Username</label>
+		<input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+		<label for="text" class="sr-only">Message</label>
+		<input type="text" id="message" name="message" class="form-control" placeholder="Message" required>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Contact</button>
+		</form>
+
+	</div>
+	<div class="col-md-4">
+	</div>
+		</div> <!-- /container -->
+
+{% endblock %}
