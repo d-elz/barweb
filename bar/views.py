@@ -13,6 +13,7 @@ from db import Bardb
 
 from django.contrib.auth.decorators import login_required# @login_required
 import json
+from Bar_Coordinator.bar0.coordinator.operations import DatabaseOperationCoordinator ,RegisterCoordinator
 
 db = Bardb()
 # Create your views here.
@@ -91,18 +92,24 @@ def logout(request):
 
     return render(request , 'bar/logout.html' , context )
 
-def register(request):
+def register_user(request):
 
-    main_title = "Bar"
-    name_menu = "Register"
-    path = sys.path
-    context = {
-                "main_title": main_title,
-                "name_menu": name_menu,
-                "path" : path
-        }
+    db = DatabaseOperationCoordinator()
+    rg = RegisterCoordinator()
 
-    return render(request , 'bar/register.html' , context )
+    if request.method == 'POST':
+        nym = request.POST.get("nym")
+        pk = request.POST.get("pk")
+
+        check_nym_exist = db.checking_pseudonym(nym)
+
+        if check_nym_exist:
+            rg.coordinator_operation(data)
+            print ""
+        else:
+            print ""
+    #return render(request , 'bar/register.html' , context )
+    return HttpResponse(request , 'bar/exchange_keys.html')
 
 def exchange_keys(request):
 

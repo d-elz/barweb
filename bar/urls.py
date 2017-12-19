@@ -7,7 +7,7 @@ urlpatterns = [
 
     #Main menu guide
     url(r'^$', views.index , name='index'  ),
-    url(r'^register/$', views.register , name='register'  ),
+    url(r'^register_user/$', views.register_user, name='register_user'),
     url(r'^about/$', views.about , name='about'  ),
     url(r'^contact/$', views.contact , name='contact'  ),
     url(r'^active/$', views.active_users , name='active_users'  ),
