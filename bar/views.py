@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 import sys, os
 
@@ -92,24 +92,33 @@ def logout(request):
 
     return render(request , 'bar/logout.html' , context )
 
+@csrf_exempt
 def register_user(request):
 
     db = DatabaseOperationCoordinator()
     rg = RegisterCoordinator()
-
+    nym = ""
+    pk = ""
     if request.method == 'POST':
         nym = request.POST.get("nym")
         pk = request.POST.get("pk")
+        print nym , pk
+        rg = RegisterCoordinator()
+        db = DatabaseOperationCoordinator()
 
+        # Checking pseudonym and send feedback to the client
         check_nym_exist = db.checking_pseudonym(nym)
 
         if check_nym_exist:
-            rg.coordinator_operation(data)
-            print ""
+            rg.coordinator_operation(nym,pk)  # Using threads to call the function coordinator_operation
+            #self.transport.write("Register||||0")  # sending the message to client
         else:
-            print ""
-    #return render(request , 'bar/register.html' , context )
-    return HttpResponse(request , 'bar/exchange_keys.html')
+            pass
+    bar_server = {
+        "nym": nym,
+        "pk": pk,
+    }
+    return HttpResponse(json.dumps(bar_server), content_type='application/json')
 
 def exchange_keys(request):
 
