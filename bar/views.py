@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+
 from django.core.exceptions import ObjectDoesNotExist
 import sys, os
 
@@ -13,7 +13,6 @@ from db import Bardb
 
 from django.contrib.auth.decorators import login_required# @login_required
 import json
-from Bar_Coordinator.bar0.coordinator.operations import DatabaseOperationCoordinator ,RegisterCoordinator
 
 db = Bardb()
 # Create your views here.
@@ -92,33 +91,18 @@ def logout(request):
 
     return render(request , 'bar/logout.html' , context )
 
-@csrf_exempt
-def register_user(request):
+def register(request):
 
-    db = DatabaseOperationCoordinator()
-    rg = RegisterCoordinator()
-    nym = ""
-    pk = ""
-    if request.method == 'POST':
-        nym = request.POST.get("nym")
-        pk = request.POST.get("pk")
-        print nym , pk
-        rg = RegisterCoordinator()
-        db = DatabaseOperationCoordinator()
+    main_title = "Bar"
+    name_menu = "Register"
+    path = sys.path
+    context = {
+                "main_title": main_title,
+                "name_menu": name_menu,
+                "path" : path
+        }
 
-        # Checking pseudonym and send feedback to the client
-        check_nym_exist = db.checking_pseudonym(nym)
-
-        if check_nym_exist:
-            rg.coordinator_operation(nym,pk)  # Using threads to call the function coordinator_operation
-            #self.transport.write("Register||||0")  # sending the message to client
-        else:
-            pass
-    bar_server = {
-        "nym": nym,
-        "pk": pk,
-    }
-    return HttpResponse(json.dumps(bar_server), content_type='application/json')
+    return render(request , 'bar/register.html' , context )
 
 def exchange_keys(request):
 
@@ -135,7 +119,11 @@ def exchange_keys(request):
 
 def exchange_client(request):
 
-    exchange_keys = db.select_entries("ExchangeKeyList")
+    nym = request.GET.get("nym")
+    print nym
+    where_dict = {'nym': nym}
+    exchange_keys = db.select_entries("ExchangeKeyList",where_dict)
+    db.delete_entries("ExchangeKeyList",where_dict)
 
     #return HttpResponse(json.dumps(resp), mimetype="application/json" )
     return HttpResponse(json.dumps(exchange_keys), content_type='application/json')

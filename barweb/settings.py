@@ -25,7 +25,7 @@ SECRET_KEY = 'nz89y+e==ueyb^m%%*jlj)6y$s9%pm@t%2#k@bk^j5qv$hfmlx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-host = urllib2.urlopen('http://ip.42.pl/raw').read()
+host = "bar0.cs.unipi.gr"
 ALLOWED_HOSTS = [host]
 
 
